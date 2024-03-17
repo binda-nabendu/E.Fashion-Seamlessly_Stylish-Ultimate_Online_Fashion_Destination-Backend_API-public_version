@@ -8,17 +8,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.stereotype.Service;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Arrays;
 import java.util.Collections;
 
+@Service
 public class SystemConfig {
     @Bean
     public SecurityFilterChain filterRequest(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeHttpRequests(autorize->autorize.requestMatchers("/api/**").authenticated()
+                .authorizeHttpRequests(authorize->authorize.requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll())
                 .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class).csrf().disable()
                 .cors().configurationSource(new CorsConfigurationSource() {
