@@ -1,6 +1,5 @@
-package org.example.ecomarcehandicraftbackend.service;
+package org.example.ecomarcehandicraftbackend.service.service_model;
 
-import jdk.jshell.spi.ExecutionControl;
 import org.example.ecomarcehandicraftbackend.exception.UserException;
 import org.example.ecomarcehandicraftbackend.model.User;
 

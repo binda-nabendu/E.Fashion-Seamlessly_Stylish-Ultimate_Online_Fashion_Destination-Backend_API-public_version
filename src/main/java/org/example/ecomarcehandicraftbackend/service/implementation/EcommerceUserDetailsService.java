@@ -1,4 +1,4 @@
-package org.example.ecomarcehandicraftbackend.service;
+package org.example.ecomarcehandicraftbackend.service.implementation;
 
 import org.example.ecomarcehandicraftbackend.model.User;
 import org.example.ecomarcehandicraftbackend.repository.UserRepository;
@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EcommerceUserService implements UserDetailsService {
-    private UserRepository userRepository;
+public class EcommerceUserDetailsService implements UserDetailsService {
+    private final UserRepository userRepository;
 
-    public EcommerceUserService(UserRepository userRepository) {
+    public EcommerceUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

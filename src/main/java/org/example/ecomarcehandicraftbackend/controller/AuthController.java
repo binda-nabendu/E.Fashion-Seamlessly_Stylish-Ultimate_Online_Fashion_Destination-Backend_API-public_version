@@ -6,7 +6,7 @@ import org.example.ecomarcehandicraftbackend.model.User;
 import org.example.ecomarcehandicraftbackend.repository.UserRepository;
 import org.example.ecomarcehandicraftbackend.request.LoginRequest;
 import org.example.ecomarcehandicraftbackend.response.AuthResponse;
-import org.example.ecomarcehandicraftbackend.service.EcommerceUserService;
+import org.example.ecomarcehandicraftbackend.service.implementation.EcommerceUserDetailsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -27,13 +27,13 @@ public class AuthController {
     private final UserRepository userRepository;
     private final JwtGenerator jwtGenerator;
     private final PasswordEncoder passwordEncoder;
-    private final EcommerceUserService ecommerceUserService;
+    private final EcommerceUserDetailsService ecommerceUserDetailsService;
 
-    public AuthController(UserRepository userRepository, JwtGenerator jwtGenerator,PasswordEncoder passwordEncoder, EcommerceUserService ecommerceUserService) {
+    public AuthController(UserRepository userRepository, JwtGenerator jwtGenerator,PasswordEncoder passwordEncoder, EcommerceUserDetailsService ecommerceUserDetailsService) {
         this.userRepository = userRepository;
         this.jwtGenerator = jwtGenerator;
         this.passwordEncoder = passwordEncoder;
-        this.ecommerceUserService = ecommerceUserService;
+        this.ecommerceUserDetailsService = ecommerceUserDetailsService;
     }
 
     @PostMapping("/signup")
@@ -76,7 +76,7 @@ public class AuthController {
     }
 
     private Authentication authenticate(String email, String password)throws BadCredentialsException {
-        UserDetails userDetails = ecommerceUserService.loadUserByUsername(email);
+        UserDetails userDetails = ecommerceUserDetailsService.loadUserByUsername(email);
         if(userDetails==null){
             throw new BadCredentialsException("Invalid Username or Password");
         }else{
