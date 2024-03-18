@@ -5,7 +5,7 @@ import org.example.ecomarcehandicraftbackend.model.Category;
 import org.example.ecomarcehandicraftbackend.model.Product;
 import org.example.ecomarcehandicraftbackend.repository.CategoryRepository;
 import org.example.ecomarcehandicraftbackend.repository.ProductRepository;
-import org.example.ecomarcehandicraftbackend.request.CreateProductRequestModel;
+import org.example.ecomarcehandicraftbackend.model.request.CreateProductRequestModel;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

@@ -5,7 +5,7 @@ import org.example.ecomarcehandicraftbackend.exception.ProductException;
 import org.example.ecomarcehandicraftbackend.exception.UserException;
 import org.example.ecomarcehandicraftbackend.model.Rating;
 import org.example.ecomarcehandicraftbackend.model.User;
-import org.example.ecomarcehandicraftbackend.request.RatingRequest;
+import org.example.ecomarcehandicraftbackend.model.request.RatingRequest;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.RatingService;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.UserService;
 import org.springframework.http.HttpStatus;

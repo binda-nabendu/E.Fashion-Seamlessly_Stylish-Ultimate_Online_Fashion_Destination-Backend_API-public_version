@@ -1,4 +1,4 @@
-package org.example.ecomarcehandicraftbackend.request;
+package org.example.ecomarcehandicraftbackend.model.request;
 
 public class AddItemRequest {
     private Long productId;

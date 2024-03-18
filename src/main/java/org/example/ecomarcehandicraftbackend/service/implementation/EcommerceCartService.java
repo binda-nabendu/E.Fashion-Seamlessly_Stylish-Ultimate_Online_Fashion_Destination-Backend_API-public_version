@@ -6,7 +6,7 @@ import org.example.ecomarcehandicraftbackend.model.CartItem;
 import org.example.ecomarcehandicraftbackend.model.Product;
 import org.example.ecomarcehandicraftbackend.model.User;
 import org.example.ecomarcehandicraftbackend.repository.CartRepository;
-import org.example.ecomarcehandicraftbackend.request.AddItemRequest;
+import org.example.ecomarcehandicraftbackend.model.request.AddItemRequest;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.CartService;
 import org.springframework.stereotype.Service;
 

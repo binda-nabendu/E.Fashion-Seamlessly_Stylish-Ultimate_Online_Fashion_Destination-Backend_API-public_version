@@ -3,7 +3,7 @@ package org.example.ecomarcehandicraftbackend.service.service_interfaces;
 import org.example.ecomarcehandicraftbackend.exception.ProductException;
 import org.example.ecomarcehandicraftbackend.model.Cart;
 import org.example.ecomarcehandicraftbackend.model.User;
-import org.example.ecomarcehandicraftbackend.request.AddItemRequest;
+import org.example.ecomarcehandicraftbackend.model.request.AddItemRequest;
 
 public interface CartService {
     public Cart createCart(User user);

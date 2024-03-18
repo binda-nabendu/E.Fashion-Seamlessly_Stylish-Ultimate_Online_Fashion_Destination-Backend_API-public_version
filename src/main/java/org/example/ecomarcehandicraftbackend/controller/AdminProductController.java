@@ -2,8 +2,8 @@ package org.example.ecomarcehandicraftbackend.controller;
 
 import org.example.ecomarcehandicraftbackend.exception.ProductException;
 import org.example.ecomarcehandicraftbackend.model.Product;
-import org.example.ecomarcehandicraftbackend.request.CreateProductRequestModel;
-import org.example.ecomarcehandicraftbackend.response.ApiResponse;
+import org.example.ecomarcehandicraftbackend.model.request.CreateProductRequestModel;
+import org.example.ecomarcehandicraftbackend.model.response.ApiResponse;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

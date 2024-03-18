@@ -40,7 +40,23 @@ public class User {
     public User(){
 
     }
-
+    public User(Long id, String firstName, String lastName, String password, String email, String role,
+                String phone, List<Address> address, List<PaymentInfo> paymentInfos, List<Rating> ratings,
+                LocalDateTime createAt, List<Review> reviews, LocalDateTime createdAt) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.phone = phone;
+        this.address = address;
+        this.paymentInfos = paymentInfos;
+        this.ratings = ratings;
+        this.createAt = createAt;
+        this.reviews = reviews;
+        this.createdAt = createdAt;
+    }
     public Long getId() {
         return id;
     }
@@ -142,22 +158,6 @@ public class User {
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public User(Long id, String firstName, String lastName, String password, String email, String role, String phone, List<Address> address, List<PaymentInfo> paymentInfos, List<Rating> ratings, LocalDateTime createAt, List<Review> reviews, LocalDateTime createdAt) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-        this.phone = phone;
-        this.address = address;
-        this.paymentInfos = paymentInfos;
-        this.ratings = ratings;
-        this.createAt = createAt;
-        this.reviews = reviews;
         this.createdAt = createdAt;
     }
 }

@@ -5,7 +5,7 @@ import org.example.ecomarcehandicraftbackend.model.Product;
 import org.example.ecomarcehandicraftbackend.model.Rating;
 import org.example.ecomarcehandicraftbackend.model.User;
 import org.example.ecomarcehandicraftbackend.repository.RatingRepository;
-import org.example.ecomarcehandicraftbackend.request.RatingRequest;
+import org.example.ecomarcehandicraftbackend.model.request.RatingRequest;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.ProductService;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.RatingService;
 import org.springframework.stereotype.Service;

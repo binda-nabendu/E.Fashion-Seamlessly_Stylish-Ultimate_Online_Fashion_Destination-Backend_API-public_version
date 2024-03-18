@@ -2,7 +2,7 @@ package org.example.ecomarcehandicraftbackend.service.service_interfaces;
 
 import org.example.ecomarcehandicraftbackend.exception.ProductException;
 import org.example.ecomarcehandicraftbackend.model.Product;
-import org.example.ecomarcehandicraftbackend.request.CreateProductRequestModel;
+import org.example.ecomarcehandicraftbackend.model.request.CreateProductRequestModel;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

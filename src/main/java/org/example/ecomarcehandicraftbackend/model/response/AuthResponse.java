@@ -1,4 +1,4 @@
-package org.example.ecomarcehandicraftbackend.response;
+package org.example.ecomarcehandicraftbackend.model.response;
 
 public class AuthResponse {
     private String jwt;
