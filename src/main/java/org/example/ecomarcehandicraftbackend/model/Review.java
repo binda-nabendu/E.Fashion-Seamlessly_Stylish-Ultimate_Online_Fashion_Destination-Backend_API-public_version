@@ -42,4 +42,24 @@ public class Review {
 
     public Review() {
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

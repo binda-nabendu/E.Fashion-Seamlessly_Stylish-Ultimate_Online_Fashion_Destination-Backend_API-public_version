@@ -8,10 +8,12 @@ import org.example.ecomarcehandicraftbackend.repository.RatingRepository;
 import org.example.ecomarcehandicraftbackend.request.RatingRequest;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.ProductService;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.RatingService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class EcommerceRatingService implements RatingService {
     private RatingRepository ratingRepository;
     private ProductService productService;

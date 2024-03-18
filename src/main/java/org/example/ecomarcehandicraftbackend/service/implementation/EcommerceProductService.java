@@ -103,6 +103,11 @@ public class EcommerceProductService implements ProductService {
     }
 
     @Override
+    public List<Product> findAllProduct() throws ProductException {
+        return productRepository.findAll();
+    }
+
+    @Override
     public List<Product> findProductByCategory(String category) {
         return null;
     }
