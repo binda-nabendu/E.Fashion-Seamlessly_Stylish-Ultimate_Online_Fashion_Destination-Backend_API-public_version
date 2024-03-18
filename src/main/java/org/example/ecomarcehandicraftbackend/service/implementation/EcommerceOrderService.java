@@ -4,13 +4,24 @@ import org.example.ecomarcehandicraftbackend.exception.OrderException;
 import org.example.ecomarcehandicraftbackend.model.Address;
 import org.example.ecomarcehandicraftbackend.model.Order;
 import org.example.ecomarcehandicraftbackend.model.User;
-import org.example.ecomarcehandicraftbackend.service.service_model.OrderService;
+import org.example.ecomarcehandicraftbackend.repository.CartRepository;
+import org.example.ecomarcehandicraftbackend.service.service_interfaces.OrderService;
+import org.example.ecomarcehandicraftbackend.service.service_interfaces.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class EcommerceOrderService implements OrderService {
+    private CartRepository cartRepository;
+    private EcommerceCartItemService ecommerceCartItemService;
+    private ProductService productService;
+
+    public EcommerceOrderService(CartRepository cartRepository, EcommerceCartItemService ecommerceCartItemService, ProductService productService) {
+        this.cartRepository = cartRepository;
+        this.ecommerceCartItemService = ecommerceCartItemService;
+        this.productService = productService;
+    }
 
     @Override
     public Order createOrder(User user, Address shippingAddress) {

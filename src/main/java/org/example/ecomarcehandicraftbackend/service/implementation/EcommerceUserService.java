@@ -4,7 +4,7 @@ import org.example.ecomarcehandicraftbackend.config.JwtGenerator;
 import org.example.ecomarcehandicraftbackend.exception.UserException;
 import org.example.ecomarcehandicraftbackend.model.User;
 import org.example.ecomarcehandicraftbackend.repository.UserRepository;
-import org.example.ecomarcehandicraftbackend.service.service_model.UserService;
+import org.example.ecomarcehandicraftbackend.service.service_interfaces.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

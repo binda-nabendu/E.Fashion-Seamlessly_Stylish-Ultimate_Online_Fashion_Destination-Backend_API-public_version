@@ -1,4 +1,4 @@
-package org.example.ecomarcehandicraftbackend.service.service_model;
+package org.example.ecomarcehandicraftbackend.service.service_interfaces;
 
 import org.example.ecomarcehandicraftbackend.exception.ProductException;
 import org.example.ecomarcehandicraftbackend.model.Product;
