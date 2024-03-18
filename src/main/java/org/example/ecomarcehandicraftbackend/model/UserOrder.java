@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Order {
+public class UserOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,7 +16,7 @@ public class Order {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="userOrder", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
     private LocalDateTime orderDate;
     private LocalDateTime deliveryDate;
@@ -32,10 +32,10 @@ public class Order {
     private int totalItem;
     private LocalDateTime createAt;
 
-    public Order() {
+    public UserOrder() {
     }
 
-    public Order(Long id, String orderId, User user, List<OrderItem> orderItems, LocalDateTime orderDate, LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice, Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createAt) {
+    public UserOrder(Long id, String orderId, User user, List<OrderItem> orderItems, LocalDateTime orderDate, LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice, Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createAt) {
         this.id = id;
         this.orderId = orderId;
         this.user = user;

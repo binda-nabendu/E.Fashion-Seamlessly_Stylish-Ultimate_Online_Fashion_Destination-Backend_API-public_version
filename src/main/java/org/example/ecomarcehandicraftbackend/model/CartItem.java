@@ -17,12 +17,12 @@ public class CartItem {
     private int quantity;
     private Integer price;
     private Integer discountedPrice;
-    private Long userld;
+    private Long userId;
 
     public CartItem() {
     }
 
-    public CartItem(Long id, Cart cart, Product product, String size, int quantity, Integer price, Integer discountedPrice, Long userld) {
+    public CartItem(Long id, Cart cart, Product product, String size, int quantity, Integer price, Integer discountedPrice, Long userId) {
         this.id = id;
         this.cart = cart;
         this.product = product;
@@ -30,7 +30,7 @@ public class CartItem {
         this.quantity = quantity;
         this.price = price;
         this.discountedPrice = discountedPrice;
-        this.userld = userld;
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -89,11 +89,11 @@ public class CartItem {
         this.discountedPrice = discountedPrice;
     }
 
-    public Long getUserld() {
-        return userld;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserld(Long userld) {
-        this.userld = userld;
+    public void setUserId(Long userld) {
+        this.userId = userld;
     }
 }

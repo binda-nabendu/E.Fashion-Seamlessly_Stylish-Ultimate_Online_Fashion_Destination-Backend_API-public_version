@@ -3,7 +3,7 @@ package org.example.ecomarcehandicraftbackend.controller;
 import org.example.ecomarcehandicraftbackend.exception.OrderException;
 import org.example.ecomarcehandicraftbackend.exception.UserException;
 import org.example.ecomarcehandicraftbackend.model.Address;
-import org.example.ecomarcehandicraftbackend.model.Order;
+import org.example.ecomarcehandicraftbackend.model.UserOrder;
 import org.example.ecomarcehandicraftbackend.model.User;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.OrderService;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.UserService;
@@ -23,16 +23,16 @@ private UserService userService;
     }
 
     @PostMapping("/")
-    public ResponseEntity<Order>createOrder(@RequestBody Address shippingAddress, @RequestHeader("Authorization") String jwt) throws UserException {
+    public ResponseEntity<UserOrder>createOrder(@RequestBody Address shippingAddress, @RequestHeader("Authorization") String jwt) throws UserException {
         User user = userService.findUserProfileByJwt(jwt);
-        Order order = orderService.createOrder(user, shippingAddress);
-        return new ResponseEntity<>(order, HttpStatus.CREATED);
+        UserOrder userOrder = orderService.createOrder(user, shippingAddress);
+        return new ResponseEntity<>(userOrder, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable("id") Long orderId, @RequestHeader("Authorization") String jwt) throws UserException, OrderException{
+    public ResponseEntity<UserOrder> getOrderById(@PathVariable("id") Long orderId, @RequestHeader("Authorization") String jwt) throws UserException, OrderException{
         User user = userService.findUserProfileByJwt(jwt);
-        Order order = orderService.findOrderById(orderId);
-        return new ResponseEntity<>(order, HttpStatus.OK);
+        UserOrder userOrder = orderService.findOrderById(orderId);
+        return new ResponseEntity<>(userOrder, HttpStatus.OK);
     }
 }

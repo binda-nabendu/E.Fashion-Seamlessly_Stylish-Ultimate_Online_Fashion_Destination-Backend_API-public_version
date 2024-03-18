@@ -7,7 +7,6 @@ import org.example.ecomarcehandicraftbackend.model.CartItem;
 import org.example.ecomarcehandicraftbackend.model.Product;
 import org.example.ecomarcehandicraftbackend.model.User;
 import org.example.ecomarcehandicraftbackend.repository.CartItemRepository;
-import org.example.ecomarcehandicraftbackend.repository.CartRepository;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.CartItemService;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.UserService;
 import org.springframework.stereotype.Service;
@@ -16,15 +15,13 @@ import java.util.Optional;
 
 @Service
 public class EcommerceCartItemService implements CartItemService {
-    private UserService userService;
-    private CartItemRepository cartItemRepository;
-    private CartRepository cartRepository;
+    private final UserService userService;
+    private final CartItemRepository cartItemRepository;
 
 
-    public EcommerceCartItemService(UserService userService, CartItemRepository cartItemRepository, CartRepository cartRepository) {
+    public EcommerceCartItemService(UserService userService, CartItemRepository cartItemRepository) {
         this.userService = userService;
         this.cartItemRepository = cartItemRepository;
-        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -41,7 +38,7 @@ public class EcommerceCartItemService implements CartItemService {
     @Override
     public CartItem updateCartItem(Long userId, Long id, CartItem cartItem) throws CartItemException, UserException {
         CartItem item = findCartItemById(id);
-        User user = userService.findUserById(item.getUserld());
+        User user = userService.findUserById(item.getUserId());
         if(user.getId().equals(userId)){
             item.setQuantity(cartItem.getQuantity());
             item.setPrice(item.getQuantity() * item.getProduct().getPrice());
@@ -51,15 +48,15 @@ public class EcommerceCartItemService implements CartItemService {
     }
 
     @Override
-    public CartItem isCartItemExits(Cart cart, Product product, String size, Long userId) {
-        CartItem cartItem = isCartItemExits(cart, product, size, userId);
+    public CartItem didCartItemExits(Cart cart, Product product, String size, Long userId) {
+        CartItem cartItem = cartItemRepository.isCartItemExist(cart, product, size, userId);
         return cartItem;
     }
 
     @Override
     public boolean removeCartItem(Long userId, Long cartItemId) throws CartItemException, UserException {
         CartItem cartItem = findCartItemById(cartItemId);
-        User cartUser = userService.findUserById(cartItem.getUserld());
+        User cartUser = userService.findUserById(cartItem.getUserId());
         User userWithReqId = userService.findUserById(userId);
         if(cartUser.getId().equals(userWithReqId.getId())){
             cartItemRepository.deleteById(cartItemId);

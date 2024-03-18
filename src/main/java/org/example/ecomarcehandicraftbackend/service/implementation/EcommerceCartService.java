@@ -37,10 +37,10 @@ public class EcommerceCartService implements CartService {
     public String addCartItem(Long userId, AddItemRequest req) throws ProductException {
         Cart cart = cartRepository.findByUserId(userId);
         Product product = ecommerceProductService.findProductById(req.getProductId());
-        CartItem isPresent = ecommerceCartItemService.isCartItemExits(cart, product, req.getSize(), userId);
+        CartItem isPresent = ecommerceCartItemService.didCartItemExits(cart, product, req.getSize(), userId);
         if(isPresent == null){
             CartItem cartItem = new CartItem();
-            cartItem.setUserld(userId);
+            cartItem.setUserId(userId);
             cartItem.setProduct(product);
             cartItem.setCart(cart);
             cartItem.setQuantity(req.getQuantity());

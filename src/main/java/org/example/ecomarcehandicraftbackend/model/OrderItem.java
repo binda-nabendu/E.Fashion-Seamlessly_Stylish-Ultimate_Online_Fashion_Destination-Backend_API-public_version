@@ -12,7 +12,7 @@ public class OrderItem {
     private Long id;
     @JsonIgnore
     @ManyToOne
-    private Order order;
+    private UserOrder userOrder;
     @ManyToOne
     private Product product;
     private String size;
@@ -25,9 +25,9 @@ public class OrderItem {
     public OrderItem() {
     }
 
-    public OrderItem(Long id, Order order, Product product, String size, int quantity, Integer price, Integer discountedPrice, Long userId, LocalDateTime deliveryDate) {
+    public OrderItem(Long id, UserOrder userOrder, Product product, String size, int quantity, Integer price, Integer discountedPrice, Long userId, LocalDateTime deliveryDate) {
         this.id = id;
-        this.order = order;
+        this.userOrder = userOrder;
         this.product = product;
         this.size = size;
         this.quantity = quantity;
@@ -45,12 +45,12 @@ public class OrderItem {
         this.id = id;
     }
 
-    public Order getOrder() {
-        return order;
+    public UserOrder getOrder() {
+        return userOrder;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder(UserOrder userOrder) {
+        this.userOrder = userOrder;
     }
 
     public Product getProduct() {

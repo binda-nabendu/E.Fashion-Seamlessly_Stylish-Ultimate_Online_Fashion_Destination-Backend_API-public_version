@@ -2,20 +2,20 @@ package org.example.ecomarcehandicraftbackend.service.service_interfaces;
 
 import org.example.ecomarcehandicraftbackend.exception.OrderException;
 import org.example.ecomarcehandicraftbackend.model.Address;
-import org.example.ecomarcehandicraftbackend.model.Order;
+import org.example.ecomarcehandicraftbackend.model.UserOrder;
 import org.example.ecomarcehandicraftbackend.model.User;
 
 import java.util.List;
 
 public interface OrderService {
-    public Order createOrder(User user, Address shippingAddress);
-    public Order findOrderById(Long orderId) throws OrderException;
-    public List<Order> usersOrderHistory(Long orderId);
-    public Order placedOrder(Long orderId) throws OrderException;
-    public Order confirmedOrder(Long orderId)throws OrderException;
-    public Order shippedOrder(Long orderId) throws OrderException;
-    public Order deliveredOrder(Long orderId) throws OrderException;
-    public Order cancledOrder(Long orderId) throws OrderException;
-    public List<Order>getAllOrders();
+    public UserOrder createOrder(User user, Address shippingAddress);
+    public UserOrder findOrderById(Long orderId) throws OrderException;
+    public List<UserOrder> usersOrderHistory(Long orderId);
+    public UserOrder placedOrder(Long orderId) throws OrderException;
+    public UserOrder confirmedOrder(Long orderId)throws OrderException;
+    public UserOrder shippedOrder(Long orderId) throws OrderException;
+    public UserOrder deliveredOrder(Long orderId) throws OrderException;
+    public UserOrder cancledOrder(Long orderId) throws OrderException;
+    public List<UserOrder>getAllOrders();
     public void deleteOrder(Long orderId) throws OrderException;
 }

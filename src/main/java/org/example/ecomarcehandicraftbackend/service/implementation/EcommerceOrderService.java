@@ -2,19 +2,20 @@ package org.example.ecomarcehandicraftbackend.service.implementation;
 
 import org.example.ecomarcehandicraftbackend.exception.OrderException;
 import org.example.ecomarcehandicraftbackend.model.Address;
-import org.example.ecomarcehandicraftbackend.model.Order;
+import org.example.ecomarcehandicraftbackend.model.UserOrder;
 import org.example.ecomarcehandicraftbackend.model.User;
 import org.example.ecomarcehandicraftbackend.repository.CartRepository;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.OrderService;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class EcommerceOrderService implements OrderService {
-    private CartRepository cartRepository;
-    private EcommerceCartItemService ecommerceCartItemService;
+    private final CartRepository cartRepository;
+    private final EcommerceCartItemService ecommerceCartItemService;
     private ProductService productService;
 
     public EcommerceOrderService(CartRepository cartRepository, EcommerceCartItemService ecommerceCartItemService, ProductService productService) {
@@ -24,47 +25,47 @@ public class EcommerceOrderService implements OrderService {
     }
 
     @Override
-    public Order createOrder(User user, Address shippingAddress) {
+    public UserOrder createOrder(User user, Address shippingAddress) {
+        return new UserOrder();
+    }
+
+    @Override
+    public UserOrder findOrderById(Long orderId) throws OrderException {
+        return new UserOrder();
+    }
+
+    @Override
+    public List<UserOrder> usersOrderHistory(Long orderId) {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public UserOrder placedOrder(Long orderId) throws OrderException {
+        return new UserOrder();
+    }
+
+    @Override
+    public UserOrder confirmedOrder(Long orderId) throws OrderException {
+        return new UserOrder();
+    }
+
+    @Override
+    public UserOrder shippedOrder(Long orderId) throws OrderException {
         return null;
     }
 
     @Override
-    public Order findOrderById(Long orderId) throws OrderException {
+    public UserOrder deliveredOrder(Long orderId) throws OrderException {
         return null;
     }
 
     @Override
-    public List<Order> usersOrderHistory(Long orderId) {
+    public UserOrder cancledOrder(Long orderId) throws OrderException {
         return null;
     }
 
     @Override
-    public Order placedOrder(Long orderId) throws OrderException {
-        return null;
-    }
-
-    @Override
-    public Order confirmedOrder(Long orderId) throws OrderException {
-        return null;
-    }
-
-    @Override
-    public Order shippedOrder(Long orderId) throws OrderException {
-        return null;
-    }
-
-    @Override
-    public Order deliveredOrder(Long orderId) throws OrderException {
-        return null;
-    }
-
-    @Override
-    public Order cancledOrder(Long orderId) throws OrderException {
-        return null;
-    }
-
-    @Override
-    public List<Order> getAllOrders() {
+    public List<UserOrder> getAllOrders() {
         return null;
     }
 

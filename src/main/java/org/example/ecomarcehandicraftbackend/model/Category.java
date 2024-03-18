@@ -13,7 +13,7 @@ public class Category {
     @Size(max = 50)
     private String name;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "parent _category_id")
+    @JoinColumn (name = "parent_category_id")
     private Category parentCategory;
     private int level;
 
