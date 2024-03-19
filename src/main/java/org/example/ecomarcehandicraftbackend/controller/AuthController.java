@@ -40,7 +40,6 @@ public class AuthController {
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws UserException{
         System.out.println("hit");
         String email = user.getEmail();
-        email = email.replace(".",""); // it will remove all . form email
         String password = passwordEncoder.encode(user.getPassword());
         String firstname = user.getFirstName();;
         String lastname = user.getLastName();
