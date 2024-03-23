@@ -15,7 +15,7 @@ public class CreateProductRequestModel {
     private int quantity;
     private Set<Size> size= new HashSet<>();
     private String imageUrl;
-    private String topLabelCategory, secondLabelCategory, subCategory;
+    private String topLabelCategory, secondLabelCategory, thirdLabelCategory;
 
     public String getTitle() {
         return title;
@@ -105,12 +105,12 @@ public class CreateProductRequestModel {
         this.secondLabelCategory = secondLabelCategory;
     }
 
-    public String getSubCategory() {
-        return subCategory;
+    public String getThirdLabelCategory() {
+        return thirdLabelCategory;
     }
 
-    public void setSubCategory(String subCategory) {
-        this.subCategory = subCategory;
+    public void setThirdLabelCategory(String thirdLabelCategory) {
+        this.thirdLabelCategory = thirdLabelCategory;
     }
 
     public int getDiscountPercent() {
@@ -121,7 +121,7 @@ public class CreateProductRequestModel {
         this.discountPercent = discountPercent;
     }
 
-    public CreateProductRequestModel(String title, String description, String color, String brand, int actualPrice, int discountPrice, int discountPercent, int quantity, Set<Size> size, String imageUrl, String topLabelCategory, String secondLabelCategory, String subCategory) {
+    public CreateProductRequestModel(String title, String description, String color, String brand, int actualPrice, int discountPrice, int discountPercent, int quantity, Set<Size> size, String imageUrl, String topLabelCategory, String secondLabelCategory, String thirdLabelCategory) {
         this.title = title;
         this.description = description;
         this.color = color;
@@ -133,7 +133,7 @@ public class CreateProductRequestModel {
         this.imageUrl = imageUrl;
         this.topLabelCategory = topLabelCategory;
         this.secondLabelCategory = secondLabelCategory;
-        this.subCategory = subCategory;
+        this.thirdLabelCategory = thirdLabelCategory;
         this.discountPercent = discountPercent;
     }
 }

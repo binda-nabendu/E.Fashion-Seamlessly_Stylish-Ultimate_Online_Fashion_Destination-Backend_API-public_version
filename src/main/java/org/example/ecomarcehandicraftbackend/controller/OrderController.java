@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/api/user/orders")
 public class OrderController{
 
 private OrderService orderService;

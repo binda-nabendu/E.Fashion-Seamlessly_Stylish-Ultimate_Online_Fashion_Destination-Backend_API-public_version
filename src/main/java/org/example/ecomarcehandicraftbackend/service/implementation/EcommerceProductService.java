@@ -37,24 +37,28 @@ public class EcommerceProductService implements ProductService {
     public Product createProduct(CreateProductRequestModel createProductRequestModel) throws ProductException {
         Category parent = categoryRepository.findByName(createProductRequestModel.getTopLabelCategory());
         if(parent==null){
-            Category category = new Category();
-            category.setName(createProductRequestModel.getTopLabelCategory());
-            category.setLevel(1);
-            categoryRepository.save(category);
+            parent = new Category();
+            parent.setName(createProductRequestModel.getTopLabelCategory());
+            parent.setLevel(1);
+//            parent.setParentCategory(parent);
+            categoryRepository.save(parent);
         }
         Category secondLabel = categoryRepository.findByNameAndParent(createProductRequestModel.getSecondLabelCategory(), parent.getName());
         if(secondLabel==null){
-            Category category = new Category();
-            category.setName(createProductRequestModel.getSecondLabelCategory());
-            category.setLevel(2);
-            categoryRepository.save(category);
+            secondLabel = new Category();
+            secondLabel.setName(createProductRequestModel.getSecondLabelCategory());
+            secondLabel.setLevel(2);
+            secondLabel.setParentCategory(parent);
+            categoryRepository.save(secondLabel);
         }
-        Category thirdLabel = categoryRepository.findByNameAndParent(createProductRequestModel.getSubCategory(), secondLabel.getName());
+        Category thirdLabel = categoryRepository.findByNameAndParent(createProductRequestModel.getThirdLabelCategory(), secondLabel.getName());
+        System.out.println("ecommerce product service: " + secondLabel.getName());
         if(thirdLabel==null){
-            Category category = new Category();
-            category.setName(createProductRequestModel.getSubCategory());
-            category.setLevel(3);
-            categoryRepository.save(category);
+            thirdLabel = new Category();
+            thirdLabel.setName(createProductRequestModel.getThirdLabelCategory());
+            thirdLabel.setLevel(3);
+            thirdLabel.setParentCategory(secondLabel);
+            categoryRepository.save(thirdLabel);
         }
 
         Product product = new Product();
@@ -66,10 +70,11 @@ public class EcommerceProductService implements ProductService {
         product.setBrand(createProductRequestModel.getBrand());
         product.setPrice(createProductRequestModel.getActualPrice());
         product.setDiscountedPrice(createProductRequestModel.getDiscountPrice());
-        product.setSizes(createProductRequestModel.getSize());
+        product.setSize(createProductRequestModel.getSize());
         product.setQuantity(createProductRequestModel.getQuantity());
         product.setCategory(thirdLabel);
         product.setCreatedAt(LocalDateTime.now());
+        System.out.println(product);
         Product savedProduct = productRepository.save(product);
         return savedProduct;
     }
@@ -78,7 +83,7 @@ public class EcommerceProductService implements ProductService {
     public String deleteProduct(Long productId) throws ProductException {
         Product product = findProductById(productId);
 
-        product.getSizes().clear();
+        product.getSize().clear();
         productRepository.delete(product);
         return "Product delete done";
     }
@@ -113,31 +118,34 @@ public class EcommerceProductService implements ProductService {
     }
 
     @Override
-    public Page<Product> getAllProduct(String category, List<String> color, List<String> size, Integer minPrice,
+    public Page<Product> getAllProduct(String category, List<String> colors, List<String> sizes, Integer minPrice,
                                        Integer maxPrice, Integer minDiscount, String sort, String stock,
                                        Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         List<Product> products = productRepository.filterProducts(category, minPrice
         ,maxPrice, minDiscount, sort);
-        if(!color.isEmpty()){
+//        System.out.println("product list: " + products.toString());
+        if(!colors.isEmpty()){
             products = products.stream().filter(
-                    p -> color.stream().anyMatch(
+                    p -> colors.stream().anyMatch(
                             c -> c.equalsIgnoreCase(p.getColor())))
                     .collect(Collectors.toList());
         }
-        if(stock != null){
-            if(stock.equals("in_stock")){
-                products = products.stream().filter(p->p.getQuantity() > 0).collect(Collectors.toList());
-            }
-        }else if(stock.equals("out_of_stock")){
-            products = products.stream().filter(p->p.getQuantity() < 1).collect(Collectors.toList());
-        }
+//        if(stock != null){
+//            if(stock.equals("in_stock")){
+//                products = products.stream().filter(p->p.getQuantity() > 0).collect(Collectors.toList());
+//            }
+//        }else if(stock.equals("out_of_stock")){
+//            products = products.stream().filter(p->p.getQuantity() < 1).collect(Collectors.toList());
+//        }
         int startIndex = (int)pageable.getOffset();
         int endIndex = Math.min(startIndex + pageable.getPageSize(), products.size());
         List<Product> productOfThatPage = products.subList(startIndex, endIndex);
-
+//
         Page<Product> filteredProduct = new PageImpl<>(productOfThatPage, pageable, products.size());
-
-        return null;
+//        System.out.println(filteredProduct);
+//
+        return filteredProduct;
+//        return null;
     }
 }

@@ -42,7 +42,7 @@ public class Product {
     @Embedded
     @ElementCollection
     @Column (name = "sizes")
-    private Set<Size> sizes=new HashSet<>();
+    private Set<Size> size =new HashSet<>();
     @Column (name = "image_url")
     private String imageUrl;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL,orphanRemoval = true)
@@ -70,7 +70,7 @@ public class Product {
         this.quantity = quantity;
         this.brand = brand;
         this.color = color;
-        this.sizes = sizes;
+        this.size = sizes;
         this.imageUrl = imageUrl;
         this.ratings = ratings;
         this.reviews = reviews;
@@ -147,16 +147,16 @@ public class Product {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColor(String colors) {
+        this.color = colors;
     }
 
-    public Set<Size> getSizes() {
-        return sizes;
+    public Set<Size> getSize() {
+        return size;
     }
 
-    public void setSizes(Set<Size> sizes) {
-        this.sizes = sizes;
+    public void setSize(Set<Size> sizes) {
+        this.size = sizes;
     }
 
     public String getImageUrl() {

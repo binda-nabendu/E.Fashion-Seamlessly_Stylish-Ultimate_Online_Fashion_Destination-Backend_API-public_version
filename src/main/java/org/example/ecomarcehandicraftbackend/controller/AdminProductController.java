@@ -52,6 +52,7 @@ public class AdminProductController {
         for (CreateProductRequestModel cPRM : createProductRequestModels){
             productService.createProduct(cPRM);
         }
+        System.out.println(createProductRequestModels.toString());
         return new ResponseEntity<>(new ApiResponse("All Product Added Done", true), HttpStatus.CREATED);
     }
 }

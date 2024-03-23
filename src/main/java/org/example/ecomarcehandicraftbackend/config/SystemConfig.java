@@ -20,7 +20,9 @@ public class SystemConfig {
     @Bean
     public SecurityFilterChain filterRequest(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeHttpRequests(authorize->authorize.requestMatchers("/api/**").authenticated()
+                .authorizeHttpRequests(authorize->authorize.requestMatchers("/api/admin/**").authenticated()
+                        .requestMatchers("/api/user/**").authenticated()
+                        .requestMatchers("/api/products/**").permitAll()
                         .anyRequest().permitAll())
                 .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class).csrf().disable()
                 .cors().configurationSource(new CorsConfigurationSource() {
