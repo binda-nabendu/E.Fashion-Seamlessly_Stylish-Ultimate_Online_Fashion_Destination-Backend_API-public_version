@@ -17,7 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/cart")
+@RequestMapping("/api/user/cart")
 @Tag(name="Cart Management", description= "find user cart, add item to cart")
 public class CartController {
     @Autowired
@@ -30,7 +30,7 @@ public class CartController {
     public ResponseEntity<Cart> findUserCart(@RequestHeader("Authorization") String jwt) throws UserException {
         User user = userService.findUserProfileByJwt(jwt);
         Cart cart = cartService.findUserCart(user.getId());
-        return new ResponseEntity<>(cart, HttpStatus.FOUND);
+        return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
     @PutMapping("/add")

@@ -12,12 +12,11 @@ public class Address {
     private String firstName;
     @Column(name="last_name")
     private String lastName;
-    @Column (name = "street_address")
-    private String streetAddress;
-    @Column (name = "city")
-    private String city;
-    @Column(name="state")
-    private String state;
+    private String mobile;
+    @Column(name="email")
+    private String email;
+    @Column (name = "address")
+    private String address;
     @Column(name="post_code")
     private String postCode;
 
@@ -25,22 +24,19 @@ public class Address {
     @JoinColumn(name="user_id")
     @JsonIgnore
     private User user;
-    private String mobile;
 
-    public Address(Long id, String firstName, String lastName, String streetAddress, String city, String state, String postCode, User user, String mobile) {
+    public Address(){
+
+    }
+    public Address(Long id, String firstName, String lastName, String address, String email, String postCode, User user, String mobile) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.streetAddress = streetAddress;
-        this.city = city;
-        this.state = state;
+        this.address = address;
+        this.email = email;
         this.postCode = postCode;
         this.user = user;
         this.mobile = mobile;
-    }
-
-    public Address() {
-
     }
 
     public Long getId() {
@@ -67,28 +63,20 @@ public class Address {
         this.lastName = lastName;
     }
 
-    public String getStreetAddress() {
-        return streetAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
+    public void setAddress(String streetAddress) {
+        this.address = streetAddress;
     }
 
-    public String getCity() {
-        return city;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
+    public void setEmail(String state) {
+        this.email = state;
     }
 
     public String getPostCode() {

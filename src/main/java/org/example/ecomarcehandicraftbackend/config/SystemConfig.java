@@ -22,6 +22,7 @@ public class SystemConfig {
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests(authorize->authorize.requestMatchers("/api/admin/**").authenticated()
                         .requestMatchers("/api/user/**").authenticated()
+                        .requestMatchers("/api/user/order/**").authenticated()
                         .requestMatchers("/api/products/**").permitAll()
                         .anyRequest().permitAll())
                 .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class).csrf().disable()

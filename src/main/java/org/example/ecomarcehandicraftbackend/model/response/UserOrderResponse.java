@@ -1,31 +1,27 @@
-package org.example.ecomarcehandicraftbackend.model;
+package org.example.ecomarcehandicraftbackend.model.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import org.example.ecomarcehandicraftbackend.model.Address;
+import org.example.ecomarcehandicraftbackend.model.OrderItem;
+import org.example.ecomarcehandicraftbackend.model.PaymentDetails;
+import org.example.ecomarcehandicraftbackend.model.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class UserOrder {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
+public class UserOrderResponse {
     private Long id;
-    @Column(name="order_id")
+
     private String orderId;
-    @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy="userOrder", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<OrderItem> orderItems = new ArrayList<>();
     private LocalDateTime orderDate;
     private LocalDateTime deliveryDate;
 
-    @OneToOne
     private Address shippingAddress;
-    @Embedded
+
     private PaymentDetails paymentDetails = new PaymentDetails();
     private double totalPrice;
     private Integer totalDiscountedPrice;
@@ -34,10 +30,10 @@ public class UserOrder {
     private int totalItem;
     private LocalDateTime createAt;
 
-    public UserOrder() {
+    public UserOrderResponse() {
     }
 
-    public UserOrder(Long id, String orderId, User user, List<OrderItem> orderItems, LocalDateTime orderDate, LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice, Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createAt) {
+    public UserOrderResponse(Long id, String orderId, User user, List<OrderItem> orderItems, LocalDateTime orderDate, LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice, Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createAt) {
         this.id = id;
         this.orderId = orderId;
         this.user = user;

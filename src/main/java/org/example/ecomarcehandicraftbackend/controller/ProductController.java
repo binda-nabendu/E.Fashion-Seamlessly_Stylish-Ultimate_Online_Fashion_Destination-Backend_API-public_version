@@ -49,6 +49,6 @@ public class ProductController {
     @GetMapping("/id/{productId}")
     public ResponseEntity<Product> findProductById(@PathVariable Long productId) throws ProductException {
         Product product = productService.findProductById(productId);
-        return new ResponseEntity<>(product, HttpStatus.FOUND);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 }

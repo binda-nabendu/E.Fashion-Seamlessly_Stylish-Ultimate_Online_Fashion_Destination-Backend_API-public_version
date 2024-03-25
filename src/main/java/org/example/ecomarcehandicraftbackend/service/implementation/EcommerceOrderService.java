@@ -2,6 +2,7 @@ package org.example.ecomarcehandicraftbackend.service.implementation;
 
 import org.example.ecomarcehandicraftbackend.exception.OrderException;
 import org.example.ecomarcehandicraftbackend.model.*;
+import org.example.ecomarcehandicraftbackend.model.response.UserOrderResponse;
 import org.example.ecomarcehandicraftbackend.repository.*;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.CartService;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.OrderItemService;
@@ -20,17 +21,18 @@ public class EcommerceOrderService implements OrderService {
     private final UserOrderRepository userOrderRepository;
     private final AddressRepository addressRepository;
     private final UserRepository userRepository;
-    private final OrderItemService orderItemService;
+    private final OrderItemRepository orderItemRepository;
     private final CartService cartService;
 
     public EcommerceOrderService(UserOrderRepository userOrderRepository, AddressRepository addressRepository,
-                                 UserRepository userRepository, OrderItemService orderItemService, CartService cartService) {
+                                 UserRepository userRepository,
+                                 OrderItemRepository orderItemRepository, CartService cartService) {
 
         this.userOrderRepository = userOrderRepository;
         this.addressRepository = addressRepository;
         this.userRepository = userRepository;
-        this.orderItemService = orderItemService;
         this.cartService = cartService;
+        this.orderItemRepository = orderItemRepository;
     }
 
     @Override
@@ -53,13 +55,15 @@ public class EcommerceOrderService implements OrderService {
             oi.setUserId(item.getUserId());
             oi.setDiscountedPrice(item.getDiscountedPrice());
 
-            OrderItem newOrderItem = orderItemService.createOrderItem(oi);
+            OrderItem newOrderItem = orderItemRepository.save(oi);
             allOrderItem.add(newOrderItem);
         }
 
         UserOrder userOrder = new UserOrder();
         userOrder.setUser(user);
+
         userOrder.setOrderItems(allOrderItem);
+
         userOrder.setTotalPrice(cart.getTotalPrice());
         userOrder.setTotalDiscountedPrice(cart.getTotalDiscountedPrice());
         userOrder.setDiscount(cart.getDiscount());
@@ -73,7 +77,7 @@ public class EcommerceOrderService implements OrderService {
 
         for(OrderItem oi : allOrderItem){
             oi.setOrder(savedOrder);
-            orderItemService.createOrderItem(oi);
+            orderItemRepository.save(oi);
         }
 
         return savedOrder;
@@ -83,7 +87,22 @@ public class EcommerceOrderService implements OrderService {
     public UserOrder findOrderById(Long orderId) throws OrderException {
         Optional<UserOrder> userOrder = userOrderRepository.findById(orderId);
         if(userOrder.isPresent()){
-            return userOrder.get();
+            System.out.println(userOrder.get().getOrderItems().toString());
+            return (userOrder.get());
+        }else {
+            throw new OrderException("Order Not exist. ID: "+orderId);
+        }
+    }
+    @Override
+    public UserOrderResponse findOrderById(Long orderId, boolean res) throws OrderException {
+        Optional<UserOrder> userOrder = userOrderRepository.findById(orderId);
+        if(userOrder.isPresent()){
+            System.out.println(userOrder.get().getOrderItems().toString());
+            UserOrder uo  = userOrder.get();
+            UserOrderResponse userOrderResponse = new UserOrderResponse(uo.getId(), uo.getOrderId(), uo.getUser(), uo.getOrderItems(),
+                    uo.getOrderDate(), uo.getDeliveryDate(), uo.getShippingAddress(), uo.getPaymentDetails(), uo.getTotalPrice(),
+                    uo.getTotalDiscountedPrice(), uo.getDiscount(), uo.getOrderStatus(), uo.getTotalItem(), uo.getCreateAt());
+            return (userOrderResponse);
         }else {
             throw new OrderException("Order Not exist. ID: "+orderId);
         }
