@@ -1,3 +1,4 @@
+# Note: It is the base version To get the advanced version with all functionality and customization you can contact me. On the footer note, I give my information.
 # Ecommerce Handicraft Backend API
 
 This is the backend API for the Ecommerce Handicraft project. It provides endpoints for managing user authentication, cart management, product listings, orders, and more.
