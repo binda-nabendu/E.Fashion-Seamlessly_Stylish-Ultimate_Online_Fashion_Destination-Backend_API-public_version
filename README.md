@@ -31,26 +31,6 @@ The Ecommerce Handicraft project aims to create an online platform for buying an
 - Order processing
 - User profile management
 
-## Endpoints
-
-The following are the main endpoints provided by this API:
-
-- **Authentication**:
-    - `/auth/signup`: Create a new user account.
-    - `/auth/login`: Authenticate user and generate JWT token.
-
-- **Product Management**:
-    - `/api/products`: Get all products or add a new product.
-    - `/api/products/{id}`: Get, update, or delete a specific product by ID.
-
-- **Cart Management**:
-    - `/api/cart`: Find user's cart by JWT token.
-    - `/api/cart/add`: Add an item to the user's cart.
-
-- **Order Management**:
-    - `/api/orders`: Get all orders or place a new order.
-    - `/api/orders/{id}`: Get details of a specific order by ID.
-
 ## Setup Instructions
 
 To set up the project locally, follow these steps:
