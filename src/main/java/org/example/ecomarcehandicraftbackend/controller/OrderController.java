@@ -1,10 +1,12 @@
 package org.example.ecomarcehandicraftbackend.controller;
 
 import org.example.ecomarcehandicraftbackend.exception.OrderException;
+import org.example.ecomarcehandicraftbackend.exception.ProductException;
 import org.example.ecomarcehandicraftbackend.exception.UserException;
 import org.example.ecomarcehandicraftbackend.model.Address;
 import org.example.ecomarcehandicraftbackend.model.UserOrder;
 import org.example.ecomarcehandicraftbackend.model.User;
+import org.example.ecomarcehandicraftbackend.model.response.ApiResponse;
 import org.example.ecomarcehandicraftbackend.model.response.UserOrderResponse;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.OrderService;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.UserService;
@@ -35,5 +37,12 @@ private UserService userService;
         User user = userService.findUserProfileByJwt(jwt);
         UserOrderResponse userOrder = orderService.findOrderById(Long.parseLong(orderId), true);
         return new ResponseEntity<>(userOrder, HttpStatus.OK);
+    }
+    @PutMapping("/{order_id}/done")
+    public ResponseEntity<ApiResponse> proceedPayment(@PathVariable("order_id") String orderId, @RequestHeader("Authorization") String jwt) throws UserException, OrderException, ProductException {
+        User user = userService.findUserProfileByJwt(jwt);
+        UserOrder userOrder = orderService.placedOrder(Long.parseLong(orderId), user.getId());
+        ApiResponse apiResponse = new ApiResponse(userOrder.getOrderStatus(), true);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

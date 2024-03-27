@@ -1,16 +1,21 @@
 package org.example.ecomarcehandicraftbackend.service.implementation;
 
+import org.example.ecomarcehandicraftbackend.exception.CartItemException;
 import org.example.ecomarcehandicraftbackend.exception.ProductException;
 import org.example.ecomarcehandicraftbackend.exception.UserException;
 import org.example.ecomarcehandicraftbackend.model.Cart;
 import org.example.ecomarcehandicraftbackend.model.CartItem;
 import org.example.ecomarcehandicraftbackend.model.Product;
 import org.example.ecomarcehandicraftbackend.model.User;
+import org.example.ecomarcehandicraftbackend.model.request.UpdateItemRequest;
+import org.example.ecomarcehandicraftbackend.repository.CartItemRepository;
 import org.example.ecomarcehandicraftbackend.repository.CartRepository;
 import org.example.ecomarcehandicraftbackend.model.request.AddItemRequest;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class EcommerceCartService implements CartService {
@@ -18,6 +23,8 @@ public class EcommerceCartService implements CartService {
     private CartRepository cartRepository;
     @Autowired
     private EcommerceCartItemService ecommerceCartItemService;
+    @Autowired
+    private CartItemRepository cartItemRepository;
     @Autowired
     private EcommerceProductService ecommerceProductService;
     @Autowired
@@ -35,7 +42,7 @@ public class EcommerceCartService implements CartService {
     }
 
     @Override
-    public String addCartItem(Long userId, AddItemRequest req) throws ProductException {
+    public Cart addCartItem(Long userId, AddItemRequest req) throws ProductException {
         Cart cart = cartRepository.findByUserId(userId);
         System.out.println(cart);
         if(cart == null){
@@ -60,10 +67,50 @@ public class EcommerceCartService implements CartService {
             CartItem newCartItem = ecommerceCartItemService.createCartItem(cartItem);
 
             cart.getCartItems().add(cartItem);
-            return ("Item Add to the cart");
+            return (cart);
 
         }else{
-            return ("Item Already Exits");
+            throw new ProductException("Item Already Exits");
+        }
+    }
+
+    /**
+     *  Major issue update price not calculated on cart,
+     *  delete price not remove from cart total price;
+     * */
+    @Override
+    public Cart updateCartItem(Long userId, UpdateItemRequest updateItem) throws ProductException {
+        Cart cart = cartRepository.findByUserId(userId);
+        System.out.println(cart);
+
+        Product product = ecommerceProductService.findProductById(updateItem.getProductId());
+        CartItem cartItem = ecommerceCartItemService.didCartItemExits(cart, product, updateItem.getSize(), userId);
+        if(cartItem != null){
+            System.out.println("quantity is: " + updateItem.getQuantity());
+            cartItem.setQuantity(updateItem.getQuantity());
+            cartItem.setSize(updateItem.getSize());
+            cartItemRepository.save(cartItem);
+            cart = cartRepository.findByUserId(userId);
+//            return cartItemRepository.findById(cartItem.getId()).get();
+            return cart;
+        }
+        throw new ProductException("Cart Item Not Found");
+    }
+
+    @Override
+    public Cart deleteCartItem(Long userId, UpdateItemRequest itemToDelete) throws ProductException {
+        Cart cart = cartRepository.findByUserId(userId);
+        System.out.println(cart);
+
+        Product product = ecommerceProductService.findProductById(itemToDelete.getProductId());
+        CartItem cartItem = ecommerceCartItemService.didCartItemExits(cart, product, itemToDelete.getSize(), userId);
+        if (cartItem != null) {
+            cartItemRepository.delete(cartItem);
+            cart = cartRepository.findByUserId(userId);
+            cart.getCartItems().remove(cartItem);
+            return cart;
+        } else {
+            throw new ProductException("Cart item with ID: " + itemToDelete.getProductId() + " not found."+itemToDelete.getProductId());
         }
     }
 

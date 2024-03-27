@@ -1,6 +1,7 @@
 package org.example.ecomarcehandicraftbackend.service.service_interfaces;
 
 import org.example.ecomarcehandicraftbackend.exception.OrderException;
+import org.example.ecomarcehandicraftbackend.exception.ProductException;
 import org.example.ecomarcehandicraftbackend.model.Address;
 import org.example.ecomarcehandicraftbackend.model.UserOrder;
 import org.example.ecomarcehandicraftbackend.model.User;
@@ -15,7 +16,7 @@ public interface OrderService {
     public UserOrder findOrderById(Long orderId) throws OrderException;
     public List<UserOrder> usersOrderHistory(Long userId);
 
-    public UserOrder placedOrder(Long orderId) throws OrderException;
+    public UserOrder placedOrder(Long orderId, Long userId) throws OrderException, ProductException;
     public UserOrder confirmedOrder(Long orderId)throws OrderException;
     public UserOrder shippedOrder(Long orderId) throws OrderException;
     public UserOrder deliveredOrder(Long orderId) throws OrderException;

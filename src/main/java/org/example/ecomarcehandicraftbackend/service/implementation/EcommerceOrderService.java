@@ -1,7 +1,9 @@
 package org.example.ecomarcehandicraftbackend.service.implementation;
 
 import org.example.ecomarcehandicraftbackend.exception.OrderException;
+import org.example.ecomarcehandicraftbackend.exception.ProductException;
 import org.example.ecomarcehandicraftbackend.model.*;
+import org.example.ecomarcehandicraftbackend.model.request.UpdateItemRequest;
 import org.example.ecomarcehandicraftbackend.model.response.UserOrderResponse;
 import org.example.ecomarcehandicraftbackend.repository.*;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.CartService;
@@ -39,7 +41,8 @@ public class EcommerceOrderService implements OrderService {
     public UserOrder createOrder(User user, Address shippingAddress) {
         shippingAddress.setUser(user);
         Address address = addressRepository.save(shippingAddress);
-        user.getAddress().add(address);
+        if(shippingAddress.getId() == 0)
+            user.getAddress().add(address);
         userRepository.save(user);
 
         Cart cart = cartService.findUserCart(user.getId());
@@ -114,11 +117,23 @@ public class EcommerceOrderService implements OrderService {
     }
 
     @Override
-    public UserOrder placedOrder(Long orderId) throws OrderException {
+    public UserOrder placedOrder(Long orderId, Long userId) throws OrderException, ProductException {
+        /**
+         it will not work properly status not save
+         */
         UserOrder userOrder = findOrderById(orderId);
         userOrder.setOrderStatus("PLACED");
         userOrder.getPaymentDetails().setStatus("COMPLETED");
-        return userOrder;
+        UserOrder savedOrder = userOrderRepository.save(userOrder);
+        for(OrderItem oi : userOrder.getOrderItems()){
+            oi.setOrder(savedOrder);
+
+            cartService.deleteCartItem(userId, new UpdateItemRequest(oi.getProduct().getId(), oi.getSize(), oi.getQuantity(), ""));
+
+            System.out.println(savedOrder.getOrderStatus());
+            orderItemRepository.save(oi);
+        }
+        return savedOrder;
     }
 
     @Override

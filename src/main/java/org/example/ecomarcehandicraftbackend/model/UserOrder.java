@@ -23,7 +23,7 @@ public class UserOrder {
     private LocalDateTime orderDate;
     private LocalDateTime deliveryDate;
 
-    @OneToOne
+    @ManyToOne
     private Address shippingAddress;
     @Embedded
     private PaymentDetails paymentDetails = new PaymentDetails();
