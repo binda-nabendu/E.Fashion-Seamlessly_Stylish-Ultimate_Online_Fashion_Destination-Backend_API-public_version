@@ -39,8 +39,7 @@ To set up the project locally, follow these steps:
 1. Clone the repository to your local machine.
 2. Ensure you have Java, MySQL, and Maven installed.
 3. Configure the `application.properties` file with your MySQL database credentials.
-4. Run the database migration scripts to create the necessary tables.
-5. Build and run the project using Maven or your preferred IDE.
+4. Build and run the project using Maven or your preferred IDE.
 
 ## Contact Information
 
@@ -48,6 +47,7 @@ For any inquiries or assistance regarding this project, feel free to contact:
 
 **Nabendu Bikash Binda**  
 **Email:** [binda.nabendu@gmail.com]()
-Visit: [nabendu.vercel.app]()
+
+**Visit:** [nabendu.vercel.app]()
 
 Your feedback and suggestions are highly appreciated!
