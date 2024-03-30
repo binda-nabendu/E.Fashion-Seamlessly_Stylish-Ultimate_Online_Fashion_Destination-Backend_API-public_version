@@ -41,6 +41,10 @@ To set up the project locally, follow these steps:
 3. Configure the `application.properties` file with your MySQL database credentials.
 4. Build and run the project using Maven or your preferred IDE.
 
+## Frontend Source Code
+You can Find Frontend Source Code
+[here](https://github.com/binda-nabendu/E.Fashion-Seamlessly_Stylish-Ultimate_Online_Fashion_Destination-frontend_public_version)
+
 ## Contact Information
 
 For any inquiries or assistance regarding this project, feel free to contact:
@@ -49,10 +53,5 @@ For any inquiries or assistance regarding this project, feel free to contact:
 * **Email:** [binda.nabendu@gmail.com]()
 * **Phone:** `+8801611809276`
 * **Visit:** [nabendu.vercel.app]()
-
-## Backend Source Code
-You can Find Frontend Source Code
-[here](https://github.com/binda-nabendu/E.Fashion-Seamlessly_Stylish-Ultimate_Online_Fashion_Destination-frontend_public_version)
-
 
 Your feedback and suggestions are highly appreciated!
