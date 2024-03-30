@@ -1,4 +1,4 @@
-# Note: It is the base version To get the advanced version with all functionality and customization you can contact me. On the footer note, I give my information.
+**Note:** [It is the base version To get the advanced version with all functionality and customization you can contact me. On the footer note, I give my information.](#contact-information)
 # Ecommerce Handicraft Backend API
 
 This is the backend API for the Ecommerce Handicraft project. It provides endpoints for managing user authentication, cart management, product listings, orders, and more.
@@ -45,9 +45,9 @@ To set up the project locally, follow these steps:
 
 For any inquiries or assistance regarding this project, feel free to contact:
 
-**Nabendu Bikash Binda**  
-**Email:** [binda.nabendu@gmail.com]()
-
-**Visit:** [nabendu.vercel.app]()
+* **Nabendu Bikash Binda**  
+* **Email:** [binda.nabendu@gmail.com]()
+* **Phone:** `+8801611809276`
+* **Visit:** [nabendu.vercel.app]()
 
 Your feedback and suggestions are highly appreciated!
