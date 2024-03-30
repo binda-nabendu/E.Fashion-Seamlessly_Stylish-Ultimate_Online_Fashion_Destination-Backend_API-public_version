@@ -1,9 +1,13 @@
 package org.example.ecomarcehandicraftbackend.controller;
 
 import org.example.ecomarcehandicraftbackend.exception.OrderException;
+import org.example.ecomarcehandicraftbackend.exception.UserException;
+import org.example.ecomarcehandicraftbackend.model.User;
 import org.example.ecomarcehandicraftbackend.model.UserOrder;
 import org.example.ecomarcehandicraftbackend.model.response.ApiResponse;
+import org.example.ecomarcehandicraftbackend.model.response.UserOrderResponse;
 import org.example.ecomarcehandicraftbackend.service.service_interfaces.OrderService;
+import org.example.ecomarcehandicraftbackend.service.service_interfaces.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +18,24 @@ import java.util.List;
 @RequestMapping("/api/admin/orders")
 public class AdminOrderController {
     private OrderService orderService;
+    private UserService userService;
 
-    public AdminOrderController(OrderService orderService) {
+    public AdminOrderController(OrderService orderService, UserService userService) {
         this.orderService = orderService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
     public ResponseEntity<List<UserOrder>> getAllOrdersHandler() {
         List<UserOrder> userOrders = orderService.getAllOrders();
         return new ResponseEntity<List<UserOrder>>(userOrders, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/{userOrderId}")
+    public ResponseEntity<UserOrderResponse> getAllOrderItem(@PathVariable("userOrderId") String orderId, @RequestHeader("Authorization") String jwt) throws UserException, OrderException{
+        User user = userService.findUserProfileByJwt(jwt);
+        UserOrderResponse userOrder = orderService.findOrderById(Long.parseLong(orderId), true);
+        return new ResponseEntity<>(userOrder, HttpStatus.OK);
     }
 
     @PutMapping("/{orderId}/confirmed")
